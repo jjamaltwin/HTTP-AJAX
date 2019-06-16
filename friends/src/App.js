@@ -28,15 +28,13 @@ class App extends Component {
       })
   }
 
-  handleSubmitFriend = () => {
-    const name = { name:this.state.name };
+  handleDelete = (id) => {
     axios
-     .post("http://localhost:5000/friends", name)
-     .then(response => {
-       console.log("POST RESPONSE", response);
-       this.setState({ friendsData: response.data });
-     })
-     .catch(error => console.log(error));
+      .delete(`http://localhost:5000/friends/${id}`)
+      .then((response) => this.setState({ friends: response.data }))
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
 
@@ -45,7 +43,7 @@ class App extends Component {
       <div className="App">
       <h1>List of Friends</h1>
       <AddFriend/>
-      <FriendsList friends={this.state.friendsData}/>
+      <FriendsList friends={this.state.friendsData} handleDelete={this.handleDelete}/>
       
       </div>
     );

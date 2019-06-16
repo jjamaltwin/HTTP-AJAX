@@ -9,7 +9,8 @@ const FriendsList = props => {
         return (
           <Friend
             key={friend.id}
-            friend={friend}
+            friend={friend} 
+            handleDelete={props.handleDelete}
           />
         );
       })}
